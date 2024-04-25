@@ -1,0 +1,34 @@
+services:
+  db_postgres:
+    image: postgres:16
+    container_name: ${CONTAINER_NAME_DB}
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - db-postgres:/var/lib/postgresql/data
+  
+  wordle_api:
+    build: 
+      context: ./backend
+      args:
+        - ENV_TYPE=prod
+    container_name: ${CONTAINER_NAME_API}
+    restart: always
+    depends_on:
+      - db_postgres
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/app
+
+volumes:
+  db-postgres:
+    driver: local
