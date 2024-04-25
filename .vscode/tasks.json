@@ -1,0 +1,61 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Production",
+            "type": "shell",
+            "command": "bash",
+            "args": ["${workspaceFolder}/scripts/run_production.sh"],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            }
+        },
+        {
+            "label": "Run Development",
+            "type": "shell",
+            "command": "bash",
+            "args": ["${workspaceFolder}/scripts/run_development.sh"],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            }
+        },
+        {
+            "label": "Terminate Containers",
+            "type": "shell",
+            "command": "bash",
+            "args": ["${workspaceFolder}/scripts/terminate_containers.sh"],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            }
+        },
+        {
+            "label": "Show Containers Logs",
+            "type": "shell",
+            "command": "bash",
+            "args": ["${workspaceFolder}/scripts/run_docker_logs.sh"],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            }
+        },
+    ]
+}
