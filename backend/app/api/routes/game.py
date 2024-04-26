@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter, HTTPException
 
 from app import schemes, crud
@@ -5,6 +6,10 @@ from app.api.deps import SessionDep
 
 router = APIRouter()
 
+
+@router.get("/", response_model=List[schemes.Game])
+async def get_games(session: SessionDep):
+    return await crud.get_games(session)
 
 @router.post("/", response_model=schemes.Game)
 async def create_game(session: SessionDep, game: schemes.GameCreate):
