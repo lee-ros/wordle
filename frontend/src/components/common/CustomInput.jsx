@@ -1,10 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 function CustomInput({ value, onChange, maxLength }) {
   const inputsRefs = useRef(new Array(maxLength).fill(null));
   const [values, setValues] = useState(
-    new Array(maxLength).fill("").map((v, i) => value.charAt(i) ?? v)
+    new Array(maxLength).fill("") //.map((v, i) => value.charAt(i) ?? v)
   );
+
+  useEffect(() => {
+    const new_values = new Array(maxLength)
+      .fill("")
+      .map((v, i) => value.charAt(i) ?? v);
+    setValues(new_values);
+  }, [value, maxLength]);
 
   const focusNextInput = (currentIndex) => {
     const nextIndex =
