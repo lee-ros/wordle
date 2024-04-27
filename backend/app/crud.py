@@ -69,8 +69,9 @@ async def create_guess(
 async def get_games(
     session: AsyncSession, skip: int = 0, limit: int = 100
 ) -> Sequence[models.Game]:
-    # TODO: order the list by id
-    results = await session.execute(select(models.Game).offset(skip).limit(limit))
+    results = await session.execute(
+        select(models.Game).offset(skip).limit(limit).order_by(models.Game.id)
+    )
     return results.scalars().all()
 
 
