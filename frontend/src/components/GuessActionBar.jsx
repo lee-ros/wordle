@@ -6,11 +6,17 @@ import CustomInput from "./common/CustomInput";
 
 function GuessActionBar() {
   const [guess, setGuess] = useState("");
+  const [error, setError] = useState("");
   const { game, setGame } = useContext(GameContext);
 
   const handleNewGuess = async () => {
-    const updatedGame = await createGuess(guess, game.id);
-    updatedGame && setGame(updatedGame);
+    try {
+      const updatedGame = await createGuess(guess, game.id);
+      updatedGame && setGame(updatedGame);
+    } catch ({ response }) {
+      setError(response.data.detail);
+      setTimeout(() => setError(""), 3000);
+    }
   };
 
   return (
@@ -38,12 +44,17 @@ function GuessActionBar() {
             Guess!
           </button>
         </div>
+        {error && <span className="text-red-600">{error}</span>}
         <div className="flex flex-row justify-start items-center">
-            <span>Game ID:</span>
-            <span className="rounded-md m-1.5 px-0.5 min-w-6 min-h-6 shadow-inner bg-slate-200">{game.id}</span>
-            <span>Remaining Guesses:</span>
-            <span className="rounded-md m-1.5 px-0.5 min-w-6 min-h-6 shadow-inner bg-slate-200">{game.guess_limit - game.guesses.length}</span>
-          </div>
+          <span>Game ID:</span>
+          <span className="rounded-md m-1.5 px-0.5 min-w-6 min-h-6 shadow-inner bg-slate-200">
+            {game.id}
+          </span>
+          <span>Remaining Guesses:</span>
+          <span className="rounded-md m-1.5 px-0.5 min-w-6 min-h-6 shadow-inner bg-slate-200">
+            {game.guess_limit - game.guesses.length}
+          </span>
+        </div>
       </div>
     </ListCard>
   );
