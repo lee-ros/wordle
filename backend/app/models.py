@@ -22,7 +22,7 @@ class Guess(Base):
     value: Mapped[str]
     coloring_scheme: Mapped[List[str]] = mapped_column(ARRAY(String))
     is_correct: Mapped[bool]
-    game_id: Mapped[int] = mapped_column(ForeignKey("game.id"))
+    game_id: Mapped[int] = mapped_column(ForeignKey("game.id", ondelete="CASCADE"))
     game: Mapped["Game"] = relationship(back_populates="guesses", lazy="selectin")
 
 
