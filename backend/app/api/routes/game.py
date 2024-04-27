@@ -15,9 +15,9 @@ async def get_games(session: SessionDep):
 async def create_game(session: SessionDep, game: schemes.GameCreate):
     try:
         return await crud.create_game(session, game)
-    except ValueError:
+    except ValueError as e:
         raise HTTPException(
-            status_code=422, detail="Could not create game with current configuration"
+            status_code=422, detail=str(e)
         )
     except:
         raise HTTPException(status_code=500, detail="Game could not be created")
@@ -38,4 +38,4 @@ async def create_guess_for_game(
     try:
         return await crud.create_guess_for_game(session, guess, game_id)
     except ValueError as e:
-        raise HTTPException(status_code=422, detail=repr(e))
+        raise HTTPException(status_code=422, detail=str(e))
