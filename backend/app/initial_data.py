@@ -4,7 +4,7 @@ import logging
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app import crud, models, schemes
+from app import models
 from app.core.db import engine
 
 
@@ -15,8 +15,11 @@ logger = logging.getLogger(__name__)
 async def add_words_to_db(session: AsyncSession):
     with open("app/words_alpha.txt", "r") as words_file:
         while word := words_file.readline():
-            if 4 <= len(word) <= 7:
-                await crud.create_word(session, schemes.WordCreate(value=word))
+            s_word = word.strip()
+            if 4 <= len(s_word) <= 7:
+                word = models.Word(value=s_word, length=len(s_word))
+                session.add(word)
+    await session.commit()
 
 
 async def db_words_count(session: AsyncSession):
