@@ -9,7 +9,7 @@ function GamesList({ games, setGames }) {
       <div className="flex flex-col justify-start">
         {games.length !== 0 ? (
           games.map((game) => {
-            return <GameItem game={game} setGames={setGames} />;
+            return <li key={game.id}><GameItem game={game} setGames={setGames} /></li>;
           })
         ) : (
           <ItemCard>
