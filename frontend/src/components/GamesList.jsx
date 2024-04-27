@@ -3,13 +3,13 @@ import GameItem from "./GameItem";
 import ItemCard from "./common/ItemCard";
 import ListCard from "./common/ListCard";
 
-function GamesList({ games }) {
+function GamesList({ games, setGames }) {
   return (
     <ListCard>
       <div className="flex flex-col justify-start">
         {games.length !== 0 ? (
           games.map((game) => {
-            return <GameItem game={game} />;
+            return <GameItem game={game} setGames={setGames} />;
           })
         ) : (
           <ItemCard>

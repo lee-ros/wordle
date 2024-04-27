@@ -20,7 +20,7 @@ function GamesFrame() {
       <div className="h-48 mb-2">
         <GamesActionBar />
       </div>
-      <GamesList games={games} />
+      <GamesList games={games} setGames={setGames} />
     </div>
   );
 }

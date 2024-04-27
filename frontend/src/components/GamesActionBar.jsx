@@ -68,6 +68,7 @@ function GamesActionBar() {
           />
         </div>
         {error && <span className="text-red-500">{error}</span>}
+        {/** TODO: try component instead of utils */}
         <button
           className="
             bg-violet-300
