@@ -71,13 +71,19 @@ function GamesActionBar() {
         {/** TODO: try component instead of utils */}
         <button
           className="
-            bg-violet-300
-            hover:bg-violet-400
-            hover:ring-2
-            hover:ring-violet-500
-            justify-self-center
-            px-4 py-2 m-1.5
-            rounded-full
+            bg-sky-400
+            border-b-4
+            border-b-sky-600
+            hover:bg-sky-500
+            hover:border-b-sky-700
+            disabled:bg-sky-200
+            disabled:border-b-sky-400
+            shadow-md
+            px-6 py-2 m-1.5
+            rounded-md
+            font-bold
+            uppercase
+            text-white
           "
           onClick={handleNewGame}
         >
