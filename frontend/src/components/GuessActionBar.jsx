@@ -29,6 +29,7 @@ function GuessActionBar() {
             value={guess}
             onChange={setGuess}
           />
+          {/** TODO: Disable button if guess isn't full */}
           <button
             className="
             bg-blue-300
