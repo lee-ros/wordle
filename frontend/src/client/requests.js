@@ -33,7 +33,7 @@ export async function fetchGames() {
 export async function createGuess(value, game_id) {
   const guess_create = { value };
   try {
-    const response = await axios.post(
+    const response = await axios.patch(
       `${API_URL}/game/${game_id}`,
       guess_create
     );

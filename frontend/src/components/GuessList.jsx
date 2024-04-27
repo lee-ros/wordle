@@ -1,43 +1,32 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { GameContext } from "../App";
+import GuessItem from "./GuessItem";
 import ListCard from "./common/ListCard";
-
-const coloring_data = {
-  in_place: "bg-green-200",
-  wrong_place: "bg-blue-200",
-  no_match: "bg-slate-200",
-};
-
-function Guess({ value, coloringScheme }) {
-  let letters = value.split("");
-
-  return (
-    <ListCard>
-      {letters.map((letter, i) => {
-        return (
-          <div
-            className={`w-8 h-8 mx-2 px-2
-                text-xl
-                rounded-md shadow-inner
-                ${coloring_data[coloringScheme[i]]}
-                `}
-          >
-            {letter}
-          </div>
-        );
-      })}
-    </ListCard>
-  );
-}
+import ItemCard from "./common/ItemCard";
 
 function GuessList() {
-  const {game, setGame} = useContext(GameContext);
+  const { game } = useContext(GameContext);
   return (
-    <div class="flex justify-center m-4">
-      {game.guesses.map((guess) => {
-        return <Guess value={guess.value} coloringScheme={guess.coloring_scheme}/>;
-      })}
-    </div>
+    <ListCard>
+      <div className="flex flex-col justify-start h-[65vh]">
+        {game.guesses.length !== 0 ? (
+          game.guesses.map((guess, i) => {
+            return (
+              <Fragment key={i}>
+                <GuessItem
+                  value={guess.value}
+                  coloringScheme={guess.coloring_scheme}
+                />
+              </Fragment>
+            );
+          })
+        ) : (
+          <ItemCard>
+            <span>You haven't made any guesses yet</span>
+          </ItemCard>
+        )}
+      </div>
+    </ListCard>
   );
 }
 
