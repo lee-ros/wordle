@@ -15,3 +15,5 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./frontend:/app
+    ports:
+      - "3000:3000"

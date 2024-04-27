@@ -1,0 +1,18 @@
+FROM node:20.12.2-alpine AS builder
+ENV ENV_MODE production
+
+WORKDIR /app
+COPY package.json .
+COPY package-lock.json .
+
+RUN npm i
+COPY . .
+RUN npm run build
+
+FROM nginx:1.25.5-alpine
+ENV ENV_MODE production
+
+COPY --from=builder /app/build /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+CMD ["nginx", "-g", "daemon off;"]
