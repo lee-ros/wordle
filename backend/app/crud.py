@@ -1,11 +1,14 @@
 from random import choice
 from typing import Sequence
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app import models, schemes
 from app.game_utils.color_scheme import generate_coloring_scheme
 from app.game_utils.game_state import GameState, calculate_game_state
+
+
+# TODO: add rollback on failure
 
 
 async def get_words(
@@ -66,6 +69,7 @@ async def create_guess(
 async def get_games(
     session: AsyncSession, skip: int = 0, limit: int = 100
 ) -> Sequence[models.Game]:
+    # TODO: order the list by id
     results = await session.execute(select(models.Game).offset(skip).limit(limit))
     return results.scalars().all()
 
@@ -94,6 +98,11 @@ async def create_game(
     await session.refresh(game)
 
     return game
+
+
+async def delete_game(session: AsyncSession, game_id: int):
+    await session.execute(delete(models.Game).where(models.Game.id == game_id))
+    await session.commit()
 
 
 async def create_guess_for_game(

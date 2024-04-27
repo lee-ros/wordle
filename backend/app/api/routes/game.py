@@ -39,3 +39,8 @@ async def create_guess_for_game(
         return await crud.create_guess_for_game(session, guess, game_id)
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
+    
+
+@router.delete("/{game_id}", status_code=204)
+async def delete_game(session: SessionDep, game_id: int):
+    await crud.delete_game(session, game_id)
