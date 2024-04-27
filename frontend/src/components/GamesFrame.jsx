@@ -10,14 +10,17 @@ function GamesFrame() {
     const games = await fetchGames();
     games && setGames(games);
   };
+
   useEffect(() => {
     getGames();
   }, []);
 
   return (
-    <div className="flex flex-row justify-between h-[50%] m-4">
-      <GamesList games={games}/>
-      <GamesActionBar />
+    <div className="flex flex-col justify-between h-[55vh] w-[40vw] m-4">
+      <div className="h-48 mb-2">
+        <GamesActionBar />
+      </div>
+      <GamesList games={games} />
     </div>
   );
 }

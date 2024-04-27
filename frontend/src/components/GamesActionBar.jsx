@@ -27,7 +27,8 @@ function Slider({ title, min, max, value, onChange }) {
 function GamesActionBar() {
   const [wordLength, setWordLength] = useState(5);
   const [guessLimit, setGuessLimit] = useState(5);
-  const {setGame} = useContext(GameContext)
+  const [error, setError] = useState("");
+  const { setGame } = useContext(GameContext);
 
   const handleWordLength = (event) => {
     setWordLength(event.target.value);
@@ -38,28 +39,35 @@ function GamesActionBar() {
   };
 
   const handleNewGame = async () => {
-    const new_game = await createGame(guessLimit, wordLength)
-    new_game && setGame(new_game)
-  }
+    try {
+      const new_game = await createGame(guessLimit, wordLength);
+      new_game && setGame(new_game);
+    } catch ({ response }) {
+      setError(response.data.detail);
+      setTimeout(() => setError(""), 3000);
+    }
+  };
 
   return (
     <ListCard>
-      <span className="font-bold text-2xl">Controls</span>
-      <div>
-        <Slider
-          title="Word Length"
-          min={4}
-          max={7}
-          value={wordLength}
-          onChange={handleWordLength}
-        />
-        <Slider
-          title="Guess Limit"
-          max={10}
-          min={4}
-          value={guessLimit}
-          onChange={handleGuessLimit}
-        />
+      <div className="flex flex-col items-center">
+        <div className="flex flex-row">
+          <Slider
+            title="Word Length"
+            min={4}
+            max={7}
+            value={wordLength}
+            onChange={handleWordLength}
+          />
+          <Slider
+            title="Guess Limit"
+            max={10}
+            min={4}
+            value={guessLimit}
+            onChange={handleGuessLimit}
+          />
+        </div>
+        {error && <span className="text-red-500">{error}</span>}
         <button
           className="
             bg-violet-300
