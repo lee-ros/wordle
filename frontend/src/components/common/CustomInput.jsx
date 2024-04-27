@@ -2,7 +2,9 @@ import { useState, useRef } from "react";
 
 function CustomInput({ value, onChange, maxLength }) {
   const inputsRefs = useRef(new Array(maxLength).fill(null));
-  const [values, setValues] = useState(new Array(maxLength).fill(""));
+  const [values, setValues] = useState(
+    new Array(maxLength).fill("").map((v, i) => value.charAt(i) ?? v)
+  );
 
   const focusNextInput = (currentIndex) => {
     const nextIndex =
@@ -30,14 +32,13 @@ function CustomInput({ value, onChange, maxLength }) {
   };
 
   const handleBackspace = (event, i) => {
-    if (event.keyCode === 8) {
-      if (values[i] === "") {
-        setValue("", i - 1);
-      } else {
-        setValue("", i);
-      }
+    if (event.keyCode !== 8) return;
 
+    if (values[i] === "") {
+      setValue("", i - 1);
       focusPreviousInput(i);
+    } else {
+      setValue("", i);
     }
   };
 
@@ -45,7 +46,7 @@ function CustomInput({ value, onChange, maxLength }) {
     let i = 0;
     while (values[i] !== "" && i < values.length - 1) i++;
     inputsRefs.current[i].focus();
-    inputsRefs.current[i].disabled = false;
+    // inputsRefs.current[i].disabled = false;
   };
 
   return (
