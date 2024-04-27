@@ -13,6 +13,7 @@ function GuessActionBar() {
     try {
       const updatedGame = await createGuess(guess, game.id);
       updatedGame && setGame(updatedGame);
+      setGuess("")
     } catch ({ response }) {
       setError(response.data.detail);
       setTimeout(() => setError(""), 3000);
@@ -49,7 +50,6 @@ function GuessActionBar() {
             value={guess}
             onChange={setGuess}
           />
-          {/** TODO: Disable button if guess isn't full */}
           <button
             className="
               bg-sky-400
