@@ -5,7 +5,9 @@
             "label": "Run Production",
             "type": "shell",
             "command": "bash",
-            "args": ["${workspaceFolder}/scripts/run_production.sh"],
+            "args": [
+                "${workspaceFolder}/scripts/run_production.sh"
+            ],
             "presentation": {
                 "echo": true,
                 "reveal": "silent",
@@ -13,13 +15,16 @@
                 "panel": "new",
                 "showReuseMessage": true,
                 "clear": false
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "Run Development",
             "type": "shell",
             "command": "bash",
-            "args": ["${workspaceFolder}/scripts/run_development.sh"],
+            "args": [
+                "${workspaceFolder}/scripts/run_development.sh"
+            ],
             "presentation": {
                 "echo": true,
                 "reveal": "silent",
@@ -27,13 +32,16 @@
                 "panel": "new",
                 "showReuseMessage": true,
                 "clear": false
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "Terminate Containers",
             "type": "shell",
             "command": "bash",
-            "args": ["${workspaceFolder}/scripts/terminate_containers.sh"],
+            "args": [
+                "${workspaceFolder}/scripts/terminate_containers.sh"
+            ],
             "presentation": {
                 "echo": true,
                 "reveal": "silent",
@@ -41,13 +49,16 @@
                 "panel": "new",
                 "showReuseMessage": true,
                 "clear": false
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "Show Containers Logs",
             "type": "shell",
             "command": "bash",
-            "args": ["${workspaceFolder}/scripts/run_docker_logs.sh"],
+            "args": [
+                "${workspaceFolder}/scripts/run_docker_logs.sh"
+            ],
             "presentation": {
                 "echo": true,
                 "reveal": "always",
@@ -55,7 +66,33 @@
                 "panel": "new",
                 "showReuseMessage": true,
                 "clear": false
-            }
+            },
+            "problemMatcher": []
         },
+        {
+            "label": "Run Alembic Migrations",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "${workspaceFolder}/scripts/run_alembic.sh ${input:revision_message}"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "revision_message",
+            "description": "Alembic revision message",
+            "default": "generic_message",
+            "type": "promptString"
+        }
     ]
 }
