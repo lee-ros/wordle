@@ -9,3 +9,9 @@ services:
       - .env
     environment:
       - ENV=dev
+
+  wordle_web:
+    build:
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app

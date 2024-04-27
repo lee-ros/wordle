@@ -28,6 +28,18 @@ services:
       - .env
     volumes:
       - ./backend:/app
+  
+  wordle_web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    container_name: ${CONTAINER_NAME_FE}
+    restart: always
+    depends_on:
+      - wordle_api
+    ports:
+      - "3000:3000"
+    
 
 volumes:
   db-postgres:
