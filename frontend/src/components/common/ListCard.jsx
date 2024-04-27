@@ -2,8 +2,8 @@ import React from "react";
 
 function ListCard({ children }) {
   return (
-    <div className="flex flex-row justify-around w-auto shadow-md rounded-md m-4 p-4 bg-slate-50">
-      {children}
+    <div className="flex flex-col shadow-inner h-[75vh] bg-gray-50 m-1.5 p-1 overflow-y-auto">
+      <ul>{children}</ul>
     </div>
   );
 }

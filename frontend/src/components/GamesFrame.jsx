@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { GameContext } from "../App";
+import React, { useEffect, useState } from "react";
 import { fetchGames } from "../client/requests";
 import GamesList from "./GamesList";
 import GamesActionBar from "./GamesActionBar";
 
 function GamesFrame() {
-  const { game, setGame } = useContext(GameContext);
   const [games, setGames] = useState([]);
 
   const getGames = async () => {
@@ -17,8 +15,9 @@ function GamesFrame() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-between w-1/3 h-[75vh] m-4">
+    <div className="flex flex-row justify-between h-[50%] m-4">
       <GamesList games={games}/>
+      <GamesActionBar />
     </div>
   );
 }

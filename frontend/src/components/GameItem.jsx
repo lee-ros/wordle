@@ -1,4 +1,4 @@
-import ListCard from "./common/ListCard";
+import ItemCard from "./common/ItemCard";
 
 const coloring_data = {
   won: "bg-green-200",
@@ -8,11 +8,11 @@ const coloring_data = {
 
 function GameItem({ game }) {
   return (
-    <ListCard>
+    <ItemCard>
       {/** Game ID */}
       <div className="w-1/3 flex flex-row justify-around items-center">
         <span>Game ID:</span>
-        <span className="rounded-md m-3 p-1 min-w-6 min-h-6 shadow-inner bg-slate-200">
+        <span className="rounded-md m-1.5 px-0.5 min-w-6 min-h-6 shadow-inner bg-slate-200">
           {game.id}
         </span>
       </div>
@@ -22,7 +22,7 @@ function GameItem({ game }) {
         <span>Status:</span>
         <span
           className={`
-                  rounded-md m-3 p-1 shadow-inner
+                  rounded-md m-1.5 px-2 shadow-inner
                   ${coloring_data[game.state]}
                   capitalize
               `}
@@ -35,16 +35,16 @@ function GameItem({ game }) {
       <div className="w-1/3 flex flex-row justify-around items-center">
         <span>Word:</span>
         {game.state === "running" ? (
-          <span className="rounded-md m-3 p-1 shadow-inner bg-slate-200">
+          <span className="rounded-md m-1.5 px-2 shadow-inner bg-slate-200">
             {"*".repeat(game.word_to_guess.length)}
           </span>
         ) : (
-          <span className="rounded-md m-3 p-1 shadow-inner bg-slate-200">
+          <span className="rounded-md m-1.5 px-2 shadow-inner bg-slate-200">
             {game.word_to_guess}
           </span>
         )}
       </div>
-    </ListCard>
+    </ItemCard>
   );
 }
 
