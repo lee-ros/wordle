@@ -7,7 +7,7 @@ const coloring_data = {
   no_match: "bg-slate-200",
 };
 
-function GuessItem({ ikey, value, coloringScheme }) {
+function GuessItem({ value, coloringScheme }) {
   const letters = value.split("");
 
   return (
@@ -19,6 +19,7 @@ function GuessItem({ ikey, value, coloringScheme }) {
             className={`w-8 h-8 mx-2 px-2
                   text-xl
                   rounded-md shadow-inner
+                  uppercase
                   ${coloring_data[coloringScheme[i]]}
                   `}
           >
