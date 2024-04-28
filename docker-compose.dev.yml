@@ -1,6 +1,6 @@
 services:
   wordle_api:
-    image: "${IMAGE_NAME_API}-dev:${IMAGE_TAG_API}"
+    image: ${IMAGE_NAME_API_DEV}:${IMAGE_TAG_API}
     build:
       dockerfile: Dockerfile.dev
     ports:
@@ -13,7 +13,7 @@ services:
       - ./backend:/app
 
   wordle_web:
-    image: "${IMAGE_NAME_WEB}-dev:${IMAGE_TAG_WEB}"
+    image: ${IMAGE_NAME_WEB_DEV}:${IMAGE_TAG_WEB}
     build:
       dockerfile: Dockerfile.dev
     volumes:
