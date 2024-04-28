@@ -2,8 +2,7 @@ FROM node:20.12.2-alpine AS builder
 ENV ENV_MODE production
 
 WORKDIR /app
-COPY package.json .
-COPY package-lock.json .
+COPY package.json package-lock.json ./
 
 RUN npm i
 COPY . .
