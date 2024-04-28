@@ -15,7 +15,7 @@ function App() {
 
   return (
     <GameContext.Provider value={{ game, setGame }}>
-      <div className="App select-none">
+      <div className="App h-screen w-screen select-none bg-gradient-to-tr from-sky-400 to-sky-900">
         <Header />
         <div className="flex justify-center w-[75wh]">
           {game?.state === "running" ? <GuessFrame /> : <GamesFrame />}

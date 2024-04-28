@@ -2,8 +2,8 @@ import React from "react";
 
 function Header() {
   return (
-    <div className="flex-row align-middle mt-10">
-      <h1 className="text-5xl font-bold">The Great Wordle Game</h1>
+    <div className="align-middle">
+      <h1 className="text-5xl text-white font-bold">The Great Wordle Game</h1>
     </div>
   );
 }
