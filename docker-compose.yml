@@ -14,10 +14,10 @@ services:
       - db-postgres:/var/lib/postgresql/data
   
   wordle_api:
+    image: ${IMAGE_NAME_API}:${IMAGE_TAG_API}
     build: 
       context: ./backend
-      args:
-        - ENV_TYPE=prod
+      dockerfile: Dockerfile.prod
     container_name: ${CONTAINER_NAME_API}
     restart: always
     depends_on:
@@ -26,14 +26,13 @@ services:
       - "8000:8000"
     env_file:
       - .env
-    volumes:
-      - ./backend:/app
   
   wordle_web:
+    image: ${IMAGE_NAME_WEB}:${IMAGE_TAG_WEB}
     build:
       context: ./frontend
       dockerfile: Dockerfile.prod
-    container_name: ${CONTAINER_NAME_FE}
+    container_name: ${CONTAINER_NAME_WEB}
     restart: always
     depends_on:
       - wordle_api
