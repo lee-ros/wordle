@@ -1,8 +1,8 @@
-"""initial migration
+"""Startup migration
 
-Revision ID: d52f4de98631
+Revision ID: 8b45a287c2cc
 Revises: 
-Create Date: 2024-04-25 00:30:16.192354
+Create Date: 2024-04-28 05:16:40.869952
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'd52f4de98631'
+revision: str = '8b45a287c2cc'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -40,7 +40,7 @@ def upgrade() -> None:
     sa.Column('coloring_scheme', sa.ARRAY(sa.String()), nullable=False),
     sa.Column('is_correct', sa.Boolean(), nullable=False),
     sa.Column('game_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['game_id'], ['game.id'], ),
+    sa.ForeignKeyConstraint(['game_id'], ['game.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
